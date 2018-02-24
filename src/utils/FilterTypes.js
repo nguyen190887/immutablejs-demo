@@ -1,6 +1,6 @@
 const FilterTypes = {
     Equals: 'Equals',
-    Contains: 'Constains',
+    Contains: 'Contains',
     StartsWith: 'StartsWith',
     EndsWith: 'EndsWith'
 };

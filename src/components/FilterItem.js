@@ -1,10 +1,11 @@
 import React from 'react';
+import FilterType from './FilterType';
 
 const FilterItem = ({name, filterType, value}) => {
     return (
         <div>
             <input type="text" value={name} />
-            <input type="text" value={filterType} />
+            <FilterType value={filterType} />
             <input type="text" value={value} />
         </div>
     );
