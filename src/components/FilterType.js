@@ -7,7 +7,7 @@ const FilterType = ({value, id, updateFilterType}) => {
         options.push(<option key={type} value={type}>{type}</option>);
     }
     return (
-        <select value={value} onChange={(event) => updateFilterType(id, event.target.value)}>
+        <select value={value} onChange={updateFilterType}>
             {options}
         </select>
     );

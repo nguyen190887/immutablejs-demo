@@ -1,4 +1,4 @@
-import { ADD_FILTER, REMOVE_FILTER, UPDATE_FILTER, UPDATE_FILTER_TYPE, SEARCH_DATA } from '../utils/actionTypes';
+import { ADD_FILTER, REMOVE_FILTER, UPDATE_FILTER, SEARCH_DATA } from '../utils/actionTypes';
 
 export const addFilter = () => {
     return {
@@ -12,19 +12,12 @@ export const search = () => {
     }
 };
 
-export const updateFilter = (id, item) => {
+export const updateFilter = (id, target, value) => {
     return {
         type: UPDATE_FILTER,
         id,
-        item
-    }
-};
-
-export const updateFilterType = (id, filterType) => {
-    return {
-        type: UPDATE_FILTER_TYPE,
-        id,
-        filterType
+        target,
+        value
     }
 };
 
