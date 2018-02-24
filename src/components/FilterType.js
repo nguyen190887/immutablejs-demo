@@ -1,13 +1,13 @@
 import React from 'react';
-import FilterTypes from '../utils/FilterTypes';
+import filterTypes from '../utils/filterTypes';
 
-const FilterType = ({value}) => {
+const FilterType = ({value, id, updateFilterType}) => {
     let options = [];
-    for (let type in FilterTypes) {
+    for (let type in filterTypes) {
         options.push(<option key={type} value={type}>{type}</option>);
     }
     return (
-        <select value={value}>
+        <select value={value} onChange={(event) => updateFilterType(id, event.target.value)}>
             {options}
         </select>
     );

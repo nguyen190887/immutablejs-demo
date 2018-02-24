@@ -1,8 +1,8 @@
-const FilterTypes = {
+const filterTypes = {
     Equals: 'Equals',
     Contains: 'Contains',
     StartsWith: 'StartsWith',
     EndsWith: 'EndsWith'
 };
 
-export default FilterTypes;
+export default filterTypes;
