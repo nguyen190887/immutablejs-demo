@@ -1,13 +1,21 @@
 import React from 'react';
 import FilterItem from './FilterItem';
 
-const SearchPanel = ({filters, search, updateFilter}) => (
+const SearchPanel = ({filters, search, updateFilter, removeFilter, addFilter}) => (
     <div>
-        Search Panel here
+        Search Panel here 
         {filters && filters.map(item => (
-            <FilterItem key={item.id} {...item} updateFilter={updateFilter}/>
+            <div key={item.id} style={{ display: 'flex' }}>
+                <FilterItem {...item} updateFilter={updateFilter}/>
+                <button onClick={ (event) => removeFilter(item.id) }> - </button>
+            </div>
         ))}
-        <button onClick={search}>Search</button>
+        <div>
+            <button onClick={addFilter}> + </button>
+        </div>
+        <div>
+            <button onClick={search}>Search</button>
+        </div>
     </div>
 );
 

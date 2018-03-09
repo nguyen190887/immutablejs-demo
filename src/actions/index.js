@@ -6,12 +6,6 @@ export const addFilter = () => {
     }
 };
 
-export const search = () => {
-    return {
-        type: SEARCH_DATA
-    }
-};
-
 export const updateFilter = (id, target, value) => {
     return {
         type: UPDATE_FILTER,
@@ -21,8 +15,15 @@ export const updateFilter = (id, target, value) => {
     }
 };
 
-export const removeFilter = () => {
+export const removeFilter = (id) => {
     return {
-        type: REMOVE_FILTER
+        type: REMOVE_FILTER,
+        id
+    }
+};
+
+export const search = () => {
+    return {
+        type: SEARCH_DATA
     }
 };
