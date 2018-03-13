@@ -2,13 +2,13 @@ import filterTypes from '../utils/filterTypes';
 import { SEARCH_DATA, UPDATE_FILTER, REMOVE_FILTER, ADD_FILTER } from '../utils/actionTypes';
 
 var currentIndex = 0;
-
-const initialState = [{
-    id: ++currentIndex,
-    name: 'name1',
-    filterType: filterTypes.Contains,
-    value: 'value1'
-}
+const initialState = [
+    {
+        id: ++currentIndex,
+        name: 'name1',
+        filterType: filterTypes.Contains,
+        value: 'value1'
+    }
 ];
 
 const updateFilter = (state, id, target, value) => {
