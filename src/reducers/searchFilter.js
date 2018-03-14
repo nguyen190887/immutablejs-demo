@@ -1,22 +1,23 @@
+import { List } from 'immutable';
 import filterTypes from '../utils/filterTypes';
 import { SEARCH_DATA, UPDATE_FILTER, REMOVE_FILTER, ADD_FILTER } from '../utils/actionTypes';
 
 var currentIndex = 0;
-const initialState = [
+const initialState = new List([
     {
         id: ++currentIndex,
         name: 'name1',
         filterType: filterTypes.Contains,
         value: 'value1'
     }
-];
+]);
 
 const updateFilter = (state, id, target, value) => {
     let foundIndex = state.findIndex(item => item.id === id);
     if (foundIndex > -1) {
-        return Object.assign(
-            [...state],
-            { [foundIndex]: Object.assign({}, state[foundIndex], { [target]: value }) });
+        return state.update(foundIndex, element => {
+            return Object.assign({}, element, {[target]: value});
+        });
     }
     return state;
 };
@@ -32,7 +33,7 @@ const addFilter = (state) => {
         value: '',
         filterType: filterTypes.Contains
     };
-    return state.concat([newFilter]);
+    return state.push(newFilter);
 };
 
 const searchFilter = (state = initialState, action) => {
@@ -44,7 +45,7 @@ const searchFilter = (state = initialState, action) => {
         case ADD_FILTER:
             return addFilter(state);
         case SEARCH_DATA:
-            console.log(`Searching data: ${JSON.stringify(state)}`);
+            console.log(`Searching data: ${JSON.stringify(state.toJS())}`);
             return state;
         default:
             return state;

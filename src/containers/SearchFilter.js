@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import SearchPanel from '../components/SearchPanel';
+import { toJS } from '../components/toJS';
 import { search, updateFilter, addFilter, removeFilter } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,6 +21,6 @@ const mapDispatchToProps = dispatch => {
 const SearchFilter = connect(
     mapStateToProps,
     mapDispatchToProps
-)(SearchPanel);
+)(toJS(SearchPanel));
 
 export default SearchFilter;
