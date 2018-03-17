@@ -1,57 +1,58 @@
+import { Map, List } from 'immutable';
 import filterTypes from '../utils/filterTypes';
 import { SEARCH_DATA, UPDATE_FILTER, REMOVE_FILTER, ADD_FILTER } from '../utils/actionTypes';
 
 var currentIndex = 0;
-const initialState = {
-    filters: [
+const initialState = Map({
+    filters: List([
         {
             id: ++currentIndex,
             name: 'name1',
-            filterType: filterTypes.Contains,
-            value: 'value1'
+            value: 'value1',
+            filterType: filterTypes.Contains
         }
-    ],
+    ]),
     searchData: ''
-};
+});
 
-const updateFilter = (state, id, target, value) => {
-    let foundIndex = state.findIndex(item => item.id === id);
+const updateFilter = (filters, id, target, value) => {
+    let foundIndex = filters.findIndex(item => item.id === id);
     if (foundIndex > -1) {
-        return Object.assign(
-            [...state],
-            { [foundIndex]: Object.assign({}, state[foundIndex], { [target]: value }) });
+        return filters.update(foundIndex, item => {
+            return Object.assign({}, item, {[target]: value});
+        })
     }
-    return state;
+    return filters;
 };
 
-const removeFilter = (state, id) => {
-    return state.filter(item => item.id !== id);
+const removeFilter = (filters, id) => {
+    return filters.filter(item => item.id !== id);
 };
 
-const addFilter = (state) => {
+const addFilter = (filters) => {
     let newFilter = {
         id: ++currentIndex,
         name: '',
         value: '',
         filterType: filterTypes.Contains
     };
-    return state.concat([newFilter]);
+    return filters.push(newFilter);
 };
 
 const getSearchData = (filters) => {
-    return JSON.stringify(filters.filter(item => item.name !== ''));
+    return JSON.stringify(filters.filter(item => item.name !== '').toJS());
 };
 
 const searchFilter = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_FILTER:
-            return {...state, filters: updateFilter(state.filters, action.id, action.target, action.value)};
+            return state.set('filters', updateFilter(state.get('filters'), action.id, action.target, action.value))
         case REMOVE_FILTER:
-            return {...state, filters: removeFilter(state.filters, action.id)};
+            return state.set('filters', removeFilter(state.get('filters'), action.id));
         case ADD_FILTER:
-            return {...state, filters: addFilter(state.filters)};
+            return state.set('filters', addFilter(state.get('filters')));
         case SEARCH_DATA:
-            return {...state, searchData: getSearchData(state.filters)};
+            return state.set('searchData', getSearchData(state.get('filters')));
         default:
             return state;
     }

@@ -2,7 +2,8 @@ import React from 'react';
 import FilterItem from './FilterItem';
 
 const SearchPanel = ({searchFilter, search, updateFilter, removeFilter, addFilter}) => {
-    const { filters, searchData } = searchFilter; 
+    const filters = searchFilter.get('filters');
+    const searchData = searchFilter.get('searchData');
     return (
         <div>
             <h1>Search Builder</h1>
