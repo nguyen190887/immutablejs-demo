@@ -4,7 +4,7 @@ import { search, updateFilter, addFilter, removeFilter } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        filters: state.searchFilter
+        searchFilter: state.searchFilter
     }
 };
 
